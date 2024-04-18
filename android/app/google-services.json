@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795590654565",
+    "project_id": "easy-pro-237",
+    "storage_bucket": "easy-pro-237.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795590654565:android:a9e545213260e83c08a48c",
+        "android_client_info": {
+          "package_name": "com.sopac.easy_pro_237"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN18OPkRmTOHq3k54oWNQg1wAG8429SR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "EasyPro - User",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor", "user",
+                "--dart-define", "environment=user",
+                "--dart-define", "API_URL=http://164.68.126.211:7000",
+                "--dart-define", "ENTER_POINT=user"
+            ]
+        },
+        {
+            "name": "EasyPro - Agent",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor", "agent",
+                "--dart-define", "environment=agent",
+                "--dart-define", "API_URL=http://164.68.126.211:7000",
+                "--dart-define", "ENTER_POINT=agent"
+            ]
+        }
+    ]
+}
