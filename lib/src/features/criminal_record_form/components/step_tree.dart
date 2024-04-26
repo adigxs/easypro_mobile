@@ -165,7 +165,7 @@ class StepTree extends StatelessWidget {
               child: Button(
                   type: ButtonType.primary,
                   onPressed: accepted == true ? onNextStep : null,
-                  text: "Note de frais"),
+                  text: "Télécharger vos documents"),
             ),
           ],
         ),
