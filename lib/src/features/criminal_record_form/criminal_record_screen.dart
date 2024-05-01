@@ -227,7 +227,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
             : step == 3
                 ? "RELISEZ VOS REPONSES SVP"
                 : step == 4
-                    ? "ATTACHEZ VOS DOCUMENTS SVP"
+                    ? "CLIQUEZ ICI SVP  "
                     : "VOTRE NOTE DE FRAIS ";
     return Scaffold(
       backgroundColor: step == 4
@@ -278,7 +278,9 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.onBackground),
+                      color: step == 4
+                          ? Colors.red
+                          : Theme.of(context).colorScheme.onBackground),
                 ),
               ],
             ),
@@ -1015,7 +1017,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                   .colorScheme
                                                   .background,
                                               title: Text(
-                                                "Success",
+                                                "PAIEMENT REUSSI",
                                                 style: Theme.of(stateContext)
                                                     .textTheme
                                                     .labelLarge!
@@ -1024,16 +1026,91 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                             .colorScheme
                                                             .onSecondary),
                                               ),
-                                              content: Text(
-                                                  "Votre demande a bien été enregistrée !\nNous vous remercions pour votre confiance.\n\nEn cas de souci contacter le service support",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelSmall!
-                                                      .copyWith(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .colorScheme
-                                                              .onSecondary)),
+                                              content: RichText(
+                                                  text: TextSpan(
+                                                      text:
+                                                          "Votre demande et votre paiement ont été reçus avec succès !\n",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .onSecondary),
+                                                      children: [
+                                                    TextSpan(
+                                                        text:
+                                                            'Nous vous remercions pour votre confiance\n\n',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSecondary)),
+                                                    TextSpan(
+                                                        text:
+                                                            'Vous serez contacté dans 48h au plus pour la suite.\n',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSecondary)),
+                                                    TextSpan(
+                                                        text:
+                                                            'Au cas contraire relancez-nous à l’adresse ',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSecondary)),
+                                                    TextSpan(
+                                                        text:
+                                                            'support@easyproonline.com\n',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onPrimaryContainer)),
+                                                    TextSpan(
+                                                        text:
+                                                            'ou par whatsapp au numéro ',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSecondary)),
+                                                    TextSpan(
+                                                        text: '621 02 40 78.',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSecondary)),
+                                                  ])),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () {
@@ -1042,15 +1119,15 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                         .add(DownloadPdf());
                                                   },
                                                   child: Text(
-                                                      'Télécharger le reçu',
+                                                      'TELECHARGEZ VOTRE REÇU',
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .labelLarge!
+                                                          .labelMedium!
                                                           .copyWith(
                                                               color: Theme.of(
                                                                       context)
                                                                   .colorScheme
-                                                                  .onSecondary)),
+                                                                  .onError)),
                                                 ),
                                               ],
                                             );
@@ -1407,15 +1484,33 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                         backgroundColor: Theme.of(context)
                                             .colorScheme
                                             .background,
-                                        title: Text(
-                                          "Payer avec ${paymentMode == 0 ? 'Orange Money' : "MTN Money"}",
-                                          style: Theme.of(stateContext)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "NUMERO PAYEUR",
+                                              style: Theme.of(stateContext)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondary),
+                                            ),
+                                            Text(
+                                              "(quelqu’un peut payer avec le numero d’un proche)",
+                                              style: Theme.of(stateContext)
+                                                  .textTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondary),
+                                            ),
+                                          ],
                                         ),
                                         content: Column(
                                           crossAxisAlignment:
@@ -1423,13 +1518,8 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                  MainAxisAlignment.end,
                                               children: [
-                                                const Label(
-                                                    title:
-                                                        "Entrer votre numéro",
-                                                    required: true),
                                                 SvgPicture.asset(
                                                   paymentMode == 0
                                                       ? Assets.logos.orange1
@@ -1440,6 +1530,9 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                       .linearToSrgbGamma(),
                                                 ),
                                               ],
+                                            ),
+                                            SizedBox(
+                                              height: Dimens.halfSpace.h,
                                             ),
                                             Input(
                                               hintText: 'Votre numéro',

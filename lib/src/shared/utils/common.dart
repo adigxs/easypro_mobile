@@ -470,7 +470,7 @@ List<Map<String, dynamic>> validateSopac = [
 
 List<Map<String, dynamic>> usagerType = [
   {"id": 1, "value": false, "title": "Je suis Camerounais né au Cameroun"},
-  {"id": 2, "value": false, "title": "Je suis Camerounais né a l'étranger"},
+  {"id": 2, "value": false, "title": "Je suis Camerounais né à l'étranger"},
   {"id": 3, "value": false, "title": "Je suis de nationalité étrangère"},
 ];
 

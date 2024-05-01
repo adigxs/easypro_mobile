@@ -406,7 +406,7 @@ class StepTwo extends StatelessWidget {
         ),
         RadioListTile<ResidenceCondition>(
           title: Text(
-            "Je réside a l'étranger",
+            "Je réside à l'étranger",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w500,
                 color: Theme.of(context).colorScheme.onBackground),

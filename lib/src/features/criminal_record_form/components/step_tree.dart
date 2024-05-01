@@ -5,6 +5,7 @@ import 'package:easy_pro/src/shared/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
 import 'package:easy_pro/src/shared/utils/sized_extension.dart';
+import 'package:flutter/widgets.dart';
 
 class StepTree extends StatelessWidget {
   const StepTree({
@@ -149,24 +150,20 @@ class StepTree extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: Button(
-                  type: ButtonType.secondary,
-                  onPressed: onBackStep,
-                  text: "Retour"),
-            ),
+            Button(
+                type: ButtonType.primary,
+                onPressed: accepted == true ? onNextStep : null,
+                text: "Télécharger vos documents"),
             SizedBox(
-              width: Dimens.space.w,
+              height: Dimens.doubleSpace.h,
             ),
-            Expanded(
-              child: Button(
-                  type: ButtonType.primary,
-                  onPressed: accepted == true ? onNextStep : null,
-                  text: "Télécharger vos documents"),
-            ),
+            Button(
+                type: ButtonType.secondary,
+                onPressed: onBackStep,
+                text: "Retour"),
           ],
         ),
         SizedBox(

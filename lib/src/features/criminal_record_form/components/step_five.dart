@@ -64,9 +64,14 @@ class StepFive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCamerounian = character == SingingCharacter.cameroonian ||
+        character == SingingCharacter.cameroforeigner;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: Dimens.doubleSpace.h,
+        ),
         const Label(
           title: "Copie de l'acte de naissance (version scannée)",
           required: true,
@@ -326,55 +331,17 @@ class StepFive extends StatelessWidget {
             Flexible(
               child: Button(
                   type: ButtonType.primary,
-                  onPressed: onNextStep,
-                  text: "Continuer"),
+                  onPressed: fileActeName != null &&
+                          (isCamerounian && fileCniFrontName != null)
+                      ? onNextStep
+                      : null,
+                  text: "MA NOTE DE FRAIS"),
             ),
           ],
         ),
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        // Row(
-        //   children: [
-        //     Flexible(
-        //       child: ElevatedButton(
-        //         onPressed: onDownloadPdf,
-        //         style: ElevatedButton.styleFrom(
-        //           backgroundColor: Theme.of(context).colorScheme.outline,
-        //           shape: RoundedRectangleBorder(
-        //             borderRadius: BorderRadius.circular(Dimens.radius.w),
-        //           ),
-        //           elevation: 1.0,
-        //         ),
-        //         child: Padding(
-        //           padding: EdgeInsets.symmetric(
-        //               vertical: Dimens.padding.h,
-        //               horizontal: Dimens.minPadding.w),
-        //           child: Stack(
-        //             children: [
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   Text(
-        //                     "Télécharger la facture",
-        //                     textAlign: TextAlign.center,
-        //                     style: Theme.of(context)
-        //                         .textTheme
-        //                         .bodyMedium!
-        //                         .copyWith(
-        //                             fontWeight: FontWeight.w600,
-        //                             color: Colors.white),
-        //                   ),
-        //                 ],
-        //               ),
-        //               Positioned(child: SvgPicture.asset(Assets.icons.download))
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     )
-        //   ],
-        // )
       ],
     );
   }
