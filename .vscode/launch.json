@@ -11,7 +11,7 @@
             "args": [
                 "--flavor", "user",
                 "--dart-define", "environment=user",
-                "--dart-define", "API_URL=http://164.68.126.211:7000",
+                "--dart-define", "API_URL=https://easyproonline.com",
                 "--dart-define", "ENTER_POINT=user"
             ]
         },

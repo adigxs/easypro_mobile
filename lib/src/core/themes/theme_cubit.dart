@@ -29,7 +29,7 @@ class ThemeCubit extends Cubit<ThemeData> {
           error: Color(0xFFFF1744),
           onError: Color(0xFFAC4040),
           onSecondaryContainer: Color(0xFF090D20),
-          onPrimaryContainer: Color(0xFF9747FF),
+          onPrimaryContainer: Color.fromARGB(255, 74, 59, 236),
           outline: Color.fromARGB(255, 255, 183, 0)),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.black,

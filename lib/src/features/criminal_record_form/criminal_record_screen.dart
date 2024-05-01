@@ -64,6 +64,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
   int paymentMode = 3;
   final int stepsLength = 5;
 
+  bool onAccepted = false;
   bool accepted = false;
   bool acceptedNote = false;
   bool isDisplayInvoice = false;
@@ -220,7 +221,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
   @override
   Widget build(BuildContext context) {
     String title = step == 1
-        ? "Bienvenue chez EASYPRO !"
+        ? ""
         : step == 2
             ? "REMPLISSEZ CE FORMULAIRE SVP"
             : step == 3
@@ -318,6 +319,12 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                   ? SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: StepOne(
+                        tremsAccepted: onAccepted,
+                        onAccepTermeChanged: (value) {
+                          setState(() {
+                            onAccepted = value!;
+                          });
+                        },
                         onNextStep: () {
                           setState(() {
                             step++;
