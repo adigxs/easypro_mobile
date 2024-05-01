@@ -175,7 +175,7 @@ class StepOne extends StatelessWidget {
                 Expanded(
                   child: Button(
                       type: ButtonType.primary,
-                      onPressed: onNextStep,
+                      onPressed: tremsAccepted ? onNextStep : null,
                       text: "J'accepte"),
                 ),
               ],
