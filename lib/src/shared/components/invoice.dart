@@ -262,7 +262,7 @@ class Invoice extends StatelessWidget {
                   child: Button(
                       type: ButtonType.primary,
                       onPressed: acceptedNote == true ? onNextStep : null,
-                      text: "Je Payer"),
+                      text: "Je Paye"),
                 ),
               ],
             ),

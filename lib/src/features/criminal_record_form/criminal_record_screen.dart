@@ -1098,7 +1098,8 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                                     .colorScheme
                                                                     .onSecondary)),
                                                     TextSpan(
-                                                        text: '621 02 40 78.',
+                                                        text:
+                                                            '(+237) 650 22 99 50',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelMedium!

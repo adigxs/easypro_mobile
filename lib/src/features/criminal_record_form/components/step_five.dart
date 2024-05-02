@@ -87,7 +87,7 @@ class StepFive extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    fileActeName ?? "Attaché le document ici!...",
+                    fileActeName ?? "Cliquez ici svp !...",
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),
@@ -123,7 +123,7 @@ class StepFive extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              fileCniFrontName ?? 'Attaché le document ici!...',
+                              fileCniFrontName ?? 'Cliquez ici svp !...',
                               textAlign: TextAlign.start,
                               style: Theme.of(context)
                                   .textTheme
@@ -158,7 +158,7 @@ class StepFive extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              fileCniBackName ?? 'Attaché le document ici!...',
+                              fileCniBackName ?? 'Cliquez ici svp !...',
                               textAlign: TextAlign.start,
                               style: Theme.of(context)
                                   .textTheme
@@ -200,7 +200,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   filePassportIdentityName ??
-                                      'Attaché le document ici!...',
+                                      'Cliquez ici svp !...',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -236,7 +236,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   filePassportVisaName ??
-                                      'Attaché le document ici!...',
+                                      'Cliquez ici svp !...',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -272,7 +272,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   fileResidencePermitName ??
-                                      'Attaché le document ici!...',
+                                      'Cliquez ici svp !...',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -310,7 +310,7 @@ class StepFive extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    fileWedCertificateName ?? 'Attaché le document ici!...',
+                    fileWedCertificateName ?? 'Cliquez ici svp !...',
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),

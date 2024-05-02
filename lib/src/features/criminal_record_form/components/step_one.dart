@@ -227,7 +227,7 @@ class StepOne extends StatelessWidget {
                           color: Theme.of(context).colorScheme.onBackground),
                       children: [
                         TextSpan(
-                          text: ' (+237) 621 02 40 78 ',
+                          text: ' (+237) 650 22 99 50 ',
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!
@@ -250,7 +250,7 @@ class StepOne extends StatelessWidget {
                                       .onBackground),
                         ),
                         TextSpan(
-                            text: "easypro@easyproonline.com",
+                            text: "support@easyproonline.com",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
@@ -263,7 +263,7 @@ class StepOne extends StatelessWidget {
                                         .onPrimaryContainer),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                emailLaunch(email: 'easypro@easyproonline.com');
+                                emailLaunch(email: 'support@easyproonline.com');
                               }),
                       ]),
                 ),
