@@ -226,7 +226,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
             : step == 3
                 ? "RELISEZ VOS REPONSES SVP"
                 : step == 4
-                    ? "CLIQUEZ ICI SVP  "
+                    ? "ATTACHEZ VOS DOCUMENTS SVP"
                     : "VOTRE NOTE DE FRAIS ";
     return Scaffold(
       backgroundColor: step == 4

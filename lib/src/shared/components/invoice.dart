@@ -277,7 +277,7 @@ class Invoice extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(Dimens.doublePadding.w),
                 child: Text(
-                  "Après paiement ne quittez pas !\n\nTELECHARGEZ IMMEDIATEMENT VOTRE REçU DE PAIEMNT SVP\n\nCONCERVEZ-LE JUSQU’À LIVRAISON DE VOTRE DOCUMENT SVP",
+                  "Après paiement ne quittez pas !\n\nTELECHARGEZ IMMEDIATEMENT VOTRE REÇU DE PAIEMENT SVP\n\nCONSERVEZ-LE JUSQU’À LIVRAISON DE VOTRE DOCUMENT SVP",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w600,
