@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:easy_pro/src/datasource/models/api_response.dart';
 import 'package:easy_pro/src/datasource/models/check_transaction_request.dart';
 import 'package:easy_pro/src/features/criminal_record_form/logic/payment/check_transaction/check_transaction_bloc.dart';
 import 'package:easy_pro/src/features/criminal_record_form/logic/payment/check_transaction/check_transaction_event.dart';
@@ -14,6 +15,7 @@ import 'package:easy_pro/src/features/criminal_record_form/logic/payment/payment
 import 'package:easy_pro/src/features/criminal_record_form/logic/payment/payment_state.dart';
 import 'package:easy_pro/src/shared/components/button.dart';
 import 'package:easy_pro/src/shared/components/input.dart';
+import 'package:easy_pro/src/shared/services/upload_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:easy_pro/src/datasource/models/criminal_record_request.dart';
 import 'package:easy_pro/src/features/criminal_record_form/components/step_five.dart';
@@ -25,6 +27,7 @@ import 'package:easy_pro/src/shared/components/loading_dialog.dart';
 import 'package:easy_pro/src/shared/components/message_dialog.dart';
 import 'package:easy_pro/src/shared/utils/mocks.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
@@ -711,31 +714,30 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                       );
 
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingWeddingFiles = true;
                                           fileWedCertificate =
                                               result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref(
-                                                '$weddingCertificatFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          fileWedCertificateName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingWeddingFiles = false;
                                           });
-                                        });
-
-                                        fileWedCertificateName =
-                                            await FirebaseStorage.instance
-                                                .ref(
-                                                    '$weddingCertificatFiles/$fileName')
-                                                .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingWeddingFiles = false;
+                                          });
+                                        }
                                       }
                                     },
                                     onTapCniFrontFile: () async {
@@ -752,29 +754,29 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                         ],
                                       );
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingCniFrontFiles = true;
                                           fileCniFront = result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref('$cniFrontFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          fileCniFrontName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingCniFrontFiles = false;
                                           });
-                                        });
-
-                                        fileCniFrontName = await FirebaseStorage
-                                            .instance
-                                            .ref('$cniFrontFiles/$fileName')
-                                            .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingCniFrontFiles = false;
+                                          });
+                                        }
                                       }
                                     },
                                     onTapCniBackFile: () async {
@@ -792,29 +794,29 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                       );
 
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingCniBackFiles = true;
                                           fileCniBack = result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref('$cniBackFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          fileCniBackName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingCniBackFiles = false;
                                           });
-                                        });
-
-                                        fileCniBackName = await FirebaseStorage
-                                            .instance
-                                            .ref('$cniBackFiles/$fileName')
-                                            .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingCniBackFiles = false;
+                                          });
+                                        }
                                       }
                                     },
                                     fileActeName: fileActe?.name,
@@ -833,31 +835,28 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                       );
 
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingBirthCertificate = true;
                                           fileActe = result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref(
-                                                '$birthCertificateFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          fileActeName = data.successResponse!;
                                           setState(() {
                                             isLoadingBirthCertificate = false;
                                           });
-                                        });
-
-                                        fileActeName = await FirebaseStorage
-                                            .instance
-                                            .ref(
-                                                '$birthCertificateFiles/$fileName')
-                                            .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingBirthCertificate = false;
+                                          });
+                                        }
                                       }
                                     },
                                     onTapPassportIdentityFile: () async {
@@ -874,30 +873,30 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                         ],
                                       );
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingPassport = true;
                                           filePassportIdentity =
                                               result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref('$passportFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          filePassportIdentityName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingPassport = false;
                                           });
-                                        });
-
-                                        filePassportIdentityName =
-                                            await FirebaseStorage.instance
-                                                .ref(
-                                                    '$passportVisaPageFiles/$fileName')
-                                                .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingPassport = false;
+                                          });
+                                        }
                                       }
                                     },
                                     onTapPassportVisaFile: () async {
@@ -915,30 +914,29 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                       );
 
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingPassportVisaPage = true;
                                           filePassportVisa = result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref(
-                                                '$passportVisaPageFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          filePassportVisaName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingPassportVisaPage = false;
                                           });
-                                        });
-
-                                        filePassportVisaName = await FirebaseStorage
-                                            .instance
-                                            .ref(
-                                                '$passportVisaPageFiles/$fileName')
-                                            .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingPassportVisaPage = false;
+                                          });
+                                        }
                                       }
                                     },
                                     onTapResidencePermitFile: () async {
@@ -955,10 +953,6 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                         ],
                                       );
                                       if (result != null) {
-                                        String fileName =
-                                            result.files.first.name;
-                                        Uint8List? fileBytes =
-                                            result.files.first.bytes;
                                         setState(() {
                                           isLoadingProofofStayInCameroonFiles =
                                               true;
@@ -966,22 +960,26 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                               result.files.first;
                                         });
 
-                                        await FirebaseStorage.instance
-                                            .ref(
-                                                '$proofofStayInCameroonFiles/$fileName')
-                                            .putData(fileBytes!)
-                                            .whenComplete(() {
+                                        PlatformFile file = result.files.first;
+
+                                        final data = await uploadFile(file);
+
+                                        if (data.successResponse != null) {
+                                          fileResidencePermitName =
+                                              data.successResponse!;
                                           setState(() {
                                             isLoadingProofofStayInCameroonFiles =
                                                 false;
                                           });
-                                        });
-
-                                        fileResidencePermitName =
-                                            await FirebaseStorage.instance
-                                                .ref(
-                                                    '$proofofStayInCameroonFiles/$fileName')
-                                                .getDownloadURL();
+                                        } else {
+                                          ApiError<dynamic> error =
+                                              data.errorResponse!;
+                                          errorMessage(message: error.message);
+                                          setState(() {
+                                            isLoadingProofofStayInCameroonFiles =
+                                                false;
+                                          });
+                                        }
                                       }
                                     },
                                   ),
@@ -1336,32 +1334,6 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
     return errorMessage;
   }
 
-  Future<String> uploadFile(
-      {required FilePickerResult result,
-      required bool isLoading,
-      required String path,
-      required PlatformFile? file}) async {
-    Uint8List? fileBytes = result.files.first.bytes;
-    String fileName = result.files.first.name;
-    setState(() {
-      isLoading = true;
-      file = result.files.first;
-    });
-
-    await FirebaseStorage.instance
-        .ref('$path/$fileName')
-        .putData(fileBytes!)
-        .whenComplete(() {
-      setState(() {
-        isLoading = false;
-      });
-    });
-
-    return await FirebaseStorage.instance
-        .ref('$path/$fileName')
-        .getDownloadURL();
-  }
-
   void showSelectPaymentBottomSheet({
     required String requestCode,
   }) {
@@ -1613,5 +1585,13 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
         });
       },
     );
+  }
+
+  void errorMessage({required String message}) {
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
