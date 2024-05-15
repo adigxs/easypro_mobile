@@ -23,5 +23,4 @@ class Environment {
 
   static const String apiBaseUrl = String.fromEnvironment('API_URL');
   static const String enterPoint = String.fromEnvironment('ENTER_POINT');
-  static const String apiFile = String.fromEnvironment('API_FILE');
 }

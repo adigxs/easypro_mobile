@@ -12,7 +12,6 @@
                 "--flavor", "user",
                 "--dart-define", "environment=user",
                 "--dart-define", "API_URL=https://easyproonline.com",
-                "--dart-define", "API_FILE=https://files.easyproonline.com",
                 "--dart-define", "ENTER_POINT=user"
             ]
         },
