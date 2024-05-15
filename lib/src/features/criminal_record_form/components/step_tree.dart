@@ -5,7 +5,6 @@ import 'package:easy_pro/src/shared/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
 import 'package:easy_pro/src/shared/utils/sized_extension.dart';
-import 'package:flutter/widgets.dart';
 
 class StepTree extends StatelessWidget {
   const StepTree({

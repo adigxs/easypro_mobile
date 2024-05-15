@@ -16,7 +16,6 @@ import 'package:easy_pro/src/features/criminal_record_form/logic/payment/payment
 import 'package:easy_pro/src/shared/components/button.dart';
 import 'package:easy_pro/src/shared/components/input.dart';
 import 'package:easy_pro/src/shared/services/upload_file.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:easy_pro/src/datasource/models/criminal_record_request.dart';
 import 'package:easy_pro/src/features/criminal_record_form/components/step_five.dart';
 import 'package:easy_pro/src/features/criminal_record_form/logic/criminal_bloc.dart';
@@ -27,7 +26,6 @@ import 'package:easy_pro/src/shared/components/loading_dialog.dart';
 import 'package:easy_pro/src/shared/components/message_dialog.dart';
 import 'package:easy_pro/src/shared/utils/mocks.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
@@ -1589,7 +1587,11 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
 
   void errorMessage({required String message}) {
     final snackBar = SnackBar(
-      content: Text(message),
+      content: Text(
+        message,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.red,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
