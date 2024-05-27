@@ -245,9 +245,9 @@ final List<Map<String, String>> birthRegionList = [
   {'value': "EXTREME-NORD", 'name': "WINA (Mayo-Danay EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "YAGOUA (Mayo-Danay - EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "ZINA (Logone-et-Chari - EXTREME-NORD)"},
-  {'value': "EXTREME-NORD", 'name': "DATCHEKA (Mayo-Danay - EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "DARGALA (Diamaré - EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "DARAK (Diamaré - EXTREME-NORD)"},
+  {'value': "EXTREME-NORD", 'name': "DATCHEKA (Mayo-Danay - EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "BOGO (Diamaré - EXTREME- NORD)"},
   {'value': "EXTREME-NORD", 'name': "BOURRHA (Mayo-Tsanaga - EXTREME-NORD)"},
   {'value': "EXTREME-NORD", 'name': "MERI (Diamaré - EXTREME-NORD)"},
@@ -400,11 +400,13 @@ final List<String> birthList = [
   "BAMUSSO (Ndian - SOUTH-WEST)",
   "BANA (Haut-Nkam - OUEST)",
   "BANDJA (Haut-Nkam - OUEST)",
+  "BANDJOUN (Koung-Khi - OUEST) ",
   "BANGANGTE (Ndé - OUEST) ",
+  "BANGEM (Koupé-Manengouba - SOUTH-WEST) ",
+  "BANKA (Haut-Nkam - OUEST) ",
   "BANGOU (Hauts-Plateaux - OUEST)",
   "BANGOURAIN (Noun - OUEST)",
   "BANGUEM (Koupé-Manengouba - SOUTH-WEST)",
-  "BANKA (Haut-Nkam - OUEST)",
   "BANKIM (Mayo-Banyo – ADAMAOUA)",
   "BANWA (Haut-Nkam - OUEST)",
   "BANYO (Mayo-Banyo – ADAMAOUA)",
@@ -444,8 +446,8 @@ final List<String> birthList = [
   "BOURRHA (Mayo-Tsanaga - EXTREME-NORD)",
   "BUEA (Fako - SOUTH-WEST)",
   "CAMPO (Océan - SUD)",
-  "DARAK (Logone-et-Chari - EXTREME-NORD)",
   "DARGALA (Diamaré - EXTREME-NORD)",
+  "DARAK (Logone-et-Chari - EXTREME-NORD)",
   "DATCHEKA (Mayo-Danay - EXTREME-NORD)",
   "DEMBO (Bénoué - NORD)",
   "DEMDENG (Koung-Khi - OUEST)",
@@ -529,8 +531,8 @@ final List<String> birthList = [
   "KOLOFATA (Mayo-Sava - EXTREME-NORD)",
   "KOMBO-ABEDIMO (Ndian - SOUTH-WEST)",
   "KOMBO-IDINTI (Ndian - SOUTH-WEST)",
-  "KONTCHA (Faro-et-Déo - ADAMAOUA)",
   "KON-YAMBETTA (Mbam-et-Inoubou - CENTRE)",
+  "KONTCHA (Faro-et-Déo - ADAMAOUA)",
   "KONYE (Meme - SOUTH-WEST)",
   "KOUOPTAMO (Noun - OUEST)",
   "KOUSSERI (Logone-et-Chari - EXTREME-NORD)",
@@ -1499,12 +1501,12 @@ List<String> regionList = [
   "CENTRE Mbam-et-Inoubou",
   "CENTRE Lékié",
   "CENTRE Haute-Sanaga",
-  "CENTRE Nyong-et-Kélié",
+  "CENTRE Nyong-et-Kéllé",
   "CENTRE Mfoundi",
   "CENTRE Mbam-et-Kim",
   "EST Haut-Nyong",
   "EST Kadey",
-  "EST Lom-et-Dérem",
+  "EST Lom-et-Djérem",
   "EST Boumba-et-Ngoko",
   "EXTREME-NORD Logone-et-Chari",
   "EXTREME-NORD Diamaré",
@@ -1597,7 +1599,7 @@ List<Map<String, dynamic>> allCours = [
     'value': ["TPGI Nanga- Eboko"]
   },
   {
-    'name': "CENTRE Nyong-et-Kélié",
+    'name': "CENTRE Nyong-et-Kéllé",
     'value': ["TPGI Eséka"]
   },
   {
@@ -1621,7 +1623,7 @@ List<Map<String, dynamic>> allCours = [
     'value': ["TPGI Batouri"]
   },
   {
-    'name': "EST Lom-et-Dérem",
+    'name': "EST Lom-et-Djérem",
     'value': ["TPGI Bertoua 1er"]
   },
   {
