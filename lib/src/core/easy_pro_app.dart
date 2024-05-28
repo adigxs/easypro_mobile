@@ -14,7 +14,7 @@ class EasyProApp extends StatelessWidget {
       create: (_) => ThemeCubit(context),
       child: BlocBuilder<ThemeCubit, ThemeData>(builder: (_, theme) {
         return MaterialApp.router(
-          title: 'WenddingPlan',
+          title: 'EasyPro',
           routerDelegate: appRouter.delegate(),
           routeInformationParser: appRouter.defaultRouteParser(),
           theme: theme,

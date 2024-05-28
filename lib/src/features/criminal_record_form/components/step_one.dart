@@ -122,7 +122,7 @@ class StepOne extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 launch(
-                                    'https://easyproonline.com/privacy-policy');
+                                    'https://easyproonline.com/terms-conditions');
                               }),
                         TextSpan(
                             text: "et confirmez ci-dessous",
