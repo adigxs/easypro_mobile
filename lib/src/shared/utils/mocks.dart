@@ -566,7 +566,7 @@ final List<String> birthList = [
   "MAMFE CENTRAL (MAMFE) (Manyu - SOUTH-WEST)",
   "MANDJOU (Lom-et-Djerem - EST)",
   "MANJO (Moungo - LITTORAL)",
-  "MAROUA 1er(Diamaré - EXTREME-NORD)",
+  "MAROUA 1er (Diamaré - EXTREME-NORD)",
   "MAROUA 2ème (Diamaré - EXTREME-NORD)",
   "MAROUA 3ème (Diamaré - EXTREME-NORD)",
   "MARTAP (Vina - ADAMAOUA)",
