@@ -64,8 +64,8 @@ class StepFive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCamerounian = character == SingingCharacter.cameroonian ||
-        character == SingingCharacter.cameroforeigner;
+    // final isCamerounian = character == SingingCharacter.cameroonian ||
+    //     character == SingingCharacter.cameroforeigner;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -331,8 +331,7 @@ class StepFive extends StatelessWidget {
             Flexible(
               child: Button(
                   type: ButtonType.primary,
-                  onPressed: fileActeName != null &&
-                          (isCamerounian && fileCniFrontName != null)
+                  onPressed: fileActeName != null && (fileCniFrontName != null)
                       ? onNextStep
                       : null,
                   text: "MA NOTE DE FRAIS"),
