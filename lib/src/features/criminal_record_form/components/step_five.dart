@@ -331,9 +331,7 @@ class StepFive extends StatelessWidget {
             Flexible(
               child: Button(
                   type: ButtonType.primary,
-                  onPressed: fileActeName != null && (fileCniFrontName != null)
-                      ? onNextStep
-                      : null,
+                  onPressed: fileActeName != null ? onNextStep : null,
                   text: "MA NOTE DE FRAIS"),
             ),
           ],

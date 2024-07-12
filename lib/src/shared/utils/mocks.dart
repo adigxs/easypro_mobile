@@ -1624,7 +1624,7 @@ List<Map<String, dynamic>> allCours = [
   },
   {
     'name': "EST Lom-et-Djérem",
-    'value': ["TPGI Bertoua 1er"]
+    'value': ["TPI Bertoua 1er"]
   },
   {
     'name': "EST Boumba-et-Ngoko",
