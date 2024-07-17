@@ -5,9 +5,8 @@ import 'package:easy_pro/src/datasource/models/api_response.dart';
 
 Future<ApiResponse<String, ApiError>> uploadFile(PlatformFile file) async {
   Dio dio = Dio();
-  // http://localhost:8003
-  // String url = 'https://files.easyproonline.com/api/v1/upload-file';
-  String url = 'http://192.168.1.104:8003/api/v1/upload-file';
+  String url = 'https://files.easyproonline.com/api/v1/upload-file';
+  // String url = 'http://192.168.1.104:8003/api/v1/upload-file';
   FormData formData = FormData.fromMap({
     'file': await MultipartFile.fromFile(
       file.path!,
