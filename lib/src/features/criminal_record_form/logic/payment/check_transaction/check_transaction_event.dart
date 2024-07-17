@@ -19,3 +19,8 @@ class OnCheckStatusTransaction extends CheckTransactionEvent {
 class OnCheckOperatorStatus extends CheckTransactionEvent {
   OnCheckOperatorStatus();
 }
+
+class OnOtherPayment extends CheckTransactionEvent {
+  final String receiptUrl;
+  OnOtherPayment({required this.receiptUrl});
+}

@@ -58,6 +58,22 @@ class CriminalRecordControllerApi {
     }
   }
 
+  Future<ApiResponse<dynamic, ApiError>> otherPayment(
+      {required Map<String, String> request}) async {
+    try {
+      await _dio.post('/api/payment/checkout_foreign_payment/',
+          data: request,
+          options: Options(headers: {
+            "Authorization": "Bearer a227b84358bedb4b30a49ec2bb52a7d27aa5ff4f",
+          }));
+      return ApiResponse.success(true);
+    } on DioError catch (e) {
+      return ApiResponse.error(createApiErrorFromDioError(e));
+    } on Exception catch (e) {
+      return ApiResponse.error(unknownError(e));
+    }
+  }
+
   Future<ApiResponse<bool, ApiError>> downloadPdf(
       {required String requestId, required String requestCode}) async {
     try {

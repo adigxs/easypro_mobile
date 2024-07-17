@@ -23,6 +23,10 @@ class CheckTransactionBloc
     on<OnCheckOperatorStatus>((event, emit) async {
       await checkSucceedtransaction(emit: emit);
     });
+
+    on<OnOtherPayment>((event, emit) async {
+      await otherPayment(emit: emit, event: event);
+    });
   }
 
   Future<void> checkTransactionStatus(
@@ -64,6 +68,30 @@ class CheckTransactionBloc
       }
     } catch (e) {
       emit(ErrorSucceedTransactionState(
+        operationId: state.operationId,
+        errorMessage: '$e',
+      ));
+    }
+  }
+
+  Future<void> otherPayment(
+      {required Emitter<CheckTransactionState> emit,
+      required OnOtherPayment event}) async {
+    emit(LoadingOtherMethodState(operationId: state.operationId));
+    final response = await criminalRecordRepository.otherPayment(request: {
+      "receipt_url": event.receiptUrl,
+      "payment_method": "wester-union"
+    });
+
+    if (response.successResponse != null) {
+      emit(SuccessCheckTransactionState(operationId: state.operationId));
+    } else {
+      ApiError<dynamic> error = response.errorResponse!;
+      emit(ErrorCheckTransactionState(
+          operationId: state.operationId, errorMessage: error.message));
+    }
+    try {} catch (e) {
+      emit(ErrorCheckTransactionState(
         operationId: state.operationId,
         errorMessage: '$e',
       ));

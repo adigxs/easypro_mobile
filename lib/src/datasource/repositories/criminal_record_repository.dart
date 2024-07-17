@@ -43,6 +43,14 @@ class CriminalRecordRepository {
     return response;
   }
 
+  Future<ApiResponse<dynamic, ApiError>> otherPayment(
+      {required Map<String, String> request}) async {
+    final response = await _apiClient
+        .getCriminalRecordController()
+        .otherPayment(request: request);
+    return response;
+  }
+
   Future<ApiResponse<dynamic, ApiError>> checkSucceedtransaction(
       {required String operationId}) async {
     final response = await _apiClient

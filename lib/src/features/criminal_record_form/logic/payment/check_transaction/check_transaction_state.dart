@@ -12,6 +12,10 @@ class LoadingCheckTransactionState extends CheckTransactionState {
   LoadingCheckTransactionState({required super.operationId});
 }
 
+class LoadingOtherMethodState extends CheckTransactionState {
+  LoadingOtherMethodState({required super.operationId});
+}
+
 class SuccessCheckTransactionState extends CheckTransactionState {
   SuccessCheckTransactionState({required super.operationId});
 }

@@ -15,6 +15,7 @@ import 'package:easy_pro/src/features/criminal_record_form/logic/payment/payment
 import 'package:easy_pro/src/features/criminal_record_form/logic/payment/payment_state.dart';
 import 'package:easy_pro/src/shared/components/button.dart';
 import 'package:easy_pro/src/shared/components/input.dart';
+import 'package:easy_pro/src/shared/components/loader.dart';
 import 'package:easy_pro/src/shared/services/upload_file.dart';
 import 'package:easy_pro/src/datasource/models/criminal_record_request.dart';
 import 'package:easy_pro/src/features/criminal_record_form/components/step_five.dart';
@@ -109,6 +110,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
   PlatformFile? filePassportIdentity;
   PlatformFile? filePassportVisa;
   PlatformFile? fileResidencePermit;
+  PlatformFile? filePaymentMethod;
 
   PlatformFile? fileActe;
 
@@ -131,6 +133,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
   bool isLoadingCniBackFiles = false;
   bool isLoadingCniFrontFiles = false;
   bool isLoadingWeddingFiles = false;
+  bool isLoadingOtherPaymentFiles = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = GlobalKey<FormState>();
@@ -142,6 +145,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
   String filePassportVisaName = '';
   String fileResidencePermitName = '';
   String fileActeName = '';
+  String otherPaymentName = '';
 
   @override
   void initState() {
@@ -991,6 +995,12 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                           message:
                                               "Vérification de la transaction.\n\nCette opération peut prendre du temps. \n\nVeuillez patienter s'il vous plait");
                                     } else if (state
+                                        is LoadingOtherMethodState) {
+                                      LoadingDialog.show(
+                                          context: context,
+                                          message:
+                                              "Enregistrement de la demande. \n\nVeuillez patienter s'il vous plait");
+                                    } else if (state
                                         is LoadingCheckTransactionState) {
                                       LoadingDialog.hide(context: context);
                                       LoadingDialog.show(
@@ -1177,21 +1187,32 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      AutoRouter.of(context)
+                                                      Navigator.of(context,
+                                                              rootNavigator:
+                                                                  true)
                                                           .pop();
-                                                      CheckTransactionRequest
-                                                          transaction =
-                                                          CheckTransactionRequest(
-                                                              requestCode:
-                                                                  requestCode);
-                                                      context
-                                                          .read<
-                                                              CheckTransactionBloc>()
-                                                          .add(OnCheckStatusTransaction(
-                                                              transaction:
-                                                                  transaction));
-                                                      AutoRouter.of(context)
-                                                          .pop();
+                                                      if (otherPaymentName !=
+                                                          '') {
+                                                        context
+                                                            .read<
+                                                                CheckTransactionBloc>()
+                                                            .add(OnOtherPayment(
+                                                                receiptUrl:
+                                                                    otherPaymentName));
+                                                      } else {
+                                                        CheckTransactionRequest
+                                                            transaction =
+                                                            CheckTransactionRequest(
+                                                                requestCode:
+                                                                    requestCode);
+                                                        context
+                                                            .read<
+                                                                CheckTransactionBloc>()
+                                                            .add(OnCheckStatusTransaction(
+                                                                transaction:
+                                                                    transaction));
+                                                      }
+
                                                       // }
                                                     },
                                                     child: Text('Réessayer',
@@ -1367,6 +1388,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                         onPressed: () {
                           stfSetState(() {
                             paymentMode = 0;
+                            otherPaymentName = '';
                           });
                           context.read<PaymentBloc>().add(
                               OnChangePaymentMethode(
@@ -1402,6 +1424,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                         onTap: () {
                           stfSetState(() {
                             paymentMode = 1;
+                            otherPaymentName = '';
                           });
                           context.read<PaymentBloc>().add(
                               OnChangePaymentMethode(
@@ -1430,6 +1453,117 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              stfSetState(() {
+                                paymentMode = 2;
+                              });
+                              context.read<PaymentBloc>().add(
+                                  OnChangePaymentMethode(
+                                      paymentMethod: PaymentMethode.mtn));
+
+                              FilePickerResult? result =
+                                  await FilePicker.platform.pickFiles(
+                                withData: true,
+                                type: FileType.custom,
+                                allowedExtensions: [
+                                  'pdf',
+                                  'doc',
+                                  'docx',
+                                  'jpg',
+                                  'png'
+                                ],
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  filePaymentMethod = result.files.first;
+                                });
+                                stfSetState(() {
+                                  isLoadingOtherPaymentFiles = true;
+                                });
+
+                                PlatformFile file = result.files.first;
+
+                                final data = await uploadFile(file);
+
+                                if (data.successResponse != null) {
+                                  setState(() {
+                                    otherPaymentName = data.successResponse!;
+                                    isLoadingOtherPaymentFiles = false;
+                                  });
+                                  stfSetState(() {
+                                    otherPaymentName = data.successResponse!;
+                                  });
+                                } else {
+                                  ApiError<dynamic> error = data.errorResponse!;
+                                  errorMessage(message: error.message);
+                                  stfSetState(() {
+                                    isLoadingOtherPaymentFiles = false;
+                                  });
+                                }
+                              }
+                            },
+                            child: Stack(
+                              children: [
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 2,
+                                        color: paymentMode == 2
+                                            ? Colors.green
+                                            : Colors.transparent),
+                                    borderRadius:
+                                        BorderRadius.circular(Dimens.radius.w),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.all(Dimens.halfPadding.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Autres methodes",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onBackground),
+                                        ),
+                                        SizedBox(
+                                          width: Dimens.space.w,
+                                        ),
+                                        isLoadingOtherPaymentFiles
+                                            ? const Loader()
+                                            : SvgPicture.asset(
+                                                Assets.icons.paperclip2),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimens.space.h,
+                          ),
+                          if (otherPaymentName != '')
+                            Text(
+                              'Le fichier a bien été join.\n Cliquez sur continuer',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                            ),
+                        ],
                       ),
                       SizedBox(
                         height: Dimens.tripleSpace.h,
@@ -1566,6 +1700,9 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                   });
                                 },
                               );
+                            } else if (paymentMode == 2) {
+                              context.read<CheckTransactionBloc>().add(
+                                  OnOtherPayment(receiptUrl: otherPaymentName));
                             } else {
                               MessageDialog.show(
                                   context: context,
@@ -1573,7 +1710,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                   message: "Choisir un mode de paiement");
                             }
                           },
-                          text: "Payer")
+                          text: otherPaymentName != '' ? "Continuer" : "Payer")
                     ],
                   ),
                 ),
