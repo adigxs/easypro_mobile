@@ -80,7 +80,8 @@ class CheckTransactionBloc
     emit(LoadingOtherMethodState(operationId: state.operationId));
     final response = await criminalRecordRepository.otherPayment(request: {
       "receipt_url": event.receiptUrl,
-      "payment_method": "wester-union"
+      "payment_method": "western-union",
+      "request_code": event.requestCode
     });
 
     if (response.successResponse != null) {

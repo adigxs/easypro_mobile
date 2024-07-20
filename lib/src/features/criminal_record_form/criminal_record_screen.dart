@@ -1197,6 +1197,8 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                                             .read<
                                                                 CheckTransactionBloc>()
                                                             .add(OnOtherPayment(
+                                                                requestCode:
+                                                                    requestCode,
                                                                 receiptUrl:
                                                                     otherPaymentName));
                                                       } else {
@@ -1702,7 +1704,9 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                               );
                             } else if (paymentMode == 2) {
                               context.read<CheckTransactionBloc>().add(
-                                  OnOtherPayment(receiptUrl: otherPaymentName));
+                                  OnOtherPayment(
+                                      receiptUrl: otherPaymentName,
+                                      requestCode: requestCode));
                             } else {
                               MessageDialog.show(
                                   context: context,

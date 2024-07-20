@@ -1,4 +1,5 @@
 import 'package:easy_pro/src/datasource/models/check_transaction_request.dart';
+import 'package:http/http.dart';
 
 abstract class CheckTransactionEvent {
   CheckTransactionEvent();
@@ -22,5 +23,6 @@ class OnCheckOperatorStatus extends CheckTransactionEvent {
 
 class OnOtherPayment extends CheckTransactionEvent {
   final String receiptUrl;
-  OnOtherPayment({required this.receiptUrl});
+  final String requestCode;
+  OnOtherPayment({required this.receiptUrl, required this.requestCode});
 }
