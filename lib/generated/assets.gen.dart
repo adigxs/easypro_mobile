@@ -33,6 +33,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter.svg
   String get filter => 'assets/icons/filter.svg';
 
+  /// File path: assets/icons/fluent--payment-16-regular.png
+  AssetGenImage get fluentPayment16RegularPng => const AssetGenImage('assets/icons/fluent--payment-16-regular.png');
+
+  /// File path: assets/icons/fluent--payment-16-regular.svg
+  String get fluentPayment16RegularSvg => 'assets/icons/fluent--payment-16-regular.svg';
+
   /// File path: assets/icons/folder.svg
   String get folder => 'assets/icons/folder.svg';
 
@@ -52,18 +58,36 @@ class $AssetsIconsGen {
   String get search => 'assets/icons/search.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [add, arrowRight, attachment1483, check, close, download, filter, folder, group, lock, mail, paperclip2, search];
+  List<dynamic> get values => [
+        add,
+        arrowRight,
+        attachment1483,
+        check,
+        close,
+        download,
+        filter,
+        fluentPayment16RegularPng,
+        fluentPayment16RegularSvg,
+        folder,
+        group,
+        lock,
+        mail,
+        paperclip2,
+        search
+      ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/fluent--payment-16-regular.png
+  AssetGenImage get fluentPayment16Regular => const AssetGenImage('assets/images/fluent--payment-16-regular.png');
+
   /// File path: assets/images/loading_error_state.png
   AssetGenImage get loadingErrorState => const AssetGenImage('assets/images/loading_error_state.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [loadingErrorState];
+  List<AssetGenImage> get values => [fluentPayment16Regular, loadingErrorState];
 }
 
 class $AssetsLogosGen {

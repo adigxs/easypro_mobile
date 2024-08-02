@@ -1527,23 +1527,32 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
+                                        isLoadingOtherPaymentFiles
+                                            ? const Loader()
+                                            : Image(
+                                                width: 32,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .error,
+                                                image: AssetImage(Assets
+                                                    .icons
+                                                    .fluentPayment16RegularPng
+                                                    .path)),
+                                        SizedBox(
+                                          width: Dimens.space.w,
+                                        ),
                                         Text(
-                                          "Autres methodes",
+                                          "Autres Methodes",
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 32,
                                                   color: Theme.of(context)
                                                       .colorScheme
-                                                      .onBackground),
+                                                      .error),
                                         ),
-                                        SizedBox(
-                                          width: Dimens.space.w,
-                                        ),
-                                        isLoadingOtherPaymentFiles
-                                            ? const Loader()
-                                            : SvgPicture.asset(
-                                                Assets.icons.paperclip2),
                                       ],
                                     ),
                                   ),
