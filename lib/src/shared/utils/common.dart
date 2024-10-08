@@ -1,5 +1,7 @@
+import 'package:easy_pro/src/core/themes/dimens.dart';
 import 'package:easy_pro/src/datasource/models/dropdown_model.dart';
 import 'package:easy_pro/src/shared/utils/mocks.dart';
+import 'package:easy_pro/src/shared/utils/sized_extension.dart';
 import 'package:flutter/material.dart';
 
 String birthCertificateFiles = "birth_certificate_files";
@@ -467,7 +469,6 @@ List<Map<String, dynamic>> validateSopac = [
   {"id": 1, "value": false, "title": "OUI, JE L'ACCEPTE"},
   {"id": 2, "value": false, "title": "J'AI PRIS ACTE"},
 ];
-
 List<Map<String, dynamic>> usagerType = [
   {"id": 1, "value": false, "title": "Je suis Camerounais né au Cameroun"},
   {"id": 2, "value": false, "title": "Je suis Camerounais né à l'étranger"},
@@ -586,3 +587,40 @@ final List<String> centralFiles = [
   "Fichier Central Exterieur",
   "Fichier Central NOSO"
 ];
+
+void displayBottomSheet(
+    {required BuildContext context,
+    required List<Widget> children,
+    required double height}) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.white,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(Dimens.largeRadius.w),
+        topRight: Radius.circular(Dimens.largeRadius.w),
+      ),
+    ),
+    builder: (context) {
+      return StatefulBuilder(builder: (stfContext, stfSetState) {
+        return Padding(
+          padding: EdgeInsets.only(
+              top: Dimens.padding.h,
+              left: Dimens.padding.w,
+              right: Dimens.padding.w,
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: height,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [...children],
+            ),
+          ),
+        );
+      });
+    },
+  );
+}

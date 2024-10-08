@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_pro/src/features/criminal_record_form/criminal_record_screen.dart';
 import 'package:easy_pro/src/shared/components/button.dart';
 import 'package:flutter/material.dart';
@@ -127,17 +128,19 @@ class StepTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "1- Civilités", required: true),
+        Label(title: "1- ${appLocalizations!.title}", required: true),
         DropdownButtonForm<DropdownModel>(
           items: civilites,
           selectedValue: selectedCivilityValue,
-          label: 'Sélectionner',
+          label: appLocalizations!.select,
           onChangeValue: (value) {},
           onChanged: onChangeCivility,
           validator: validatorCivility,
@@ -145,16 +148,16 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "2- Nom et Prénoms", required: true),
+        Label(title: "2- ${appLocalizations.full_name}", required: true),
         Input(
-          hintText: 'Votre réponse',
+          hintText: appLocalizations.answer,
           controller: fullNameController,
           validator: ValidationBuilder().required().build(),
         ),
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "3- Numéro de téléphone", required: true),
+        Label(title: "3- ${appLocalizations.phone_number}", required: true),
         DecoratedBox(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(Dimens.radius.w)),
@@ -181,7 +184,7 @@ class StepTwo extends StatelessWidget {
                 .labelLarge!
                 .copyWith(color: Theme.of(context).colorScheme.onBackground),
             inputDecoration: InputDecoration.collapsed(
-                hintText: 'Votre réponse',
+                hintText: appLocalizations.answer,
                 hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -195,7 +198,7 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "4- Contact Whatsapp", required: true),
+        Label(title: "4- ${appLocalizations.whastapp_number}", required: true),
         DecoratedBox(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(Dimens.radius.w)),
@@ -222,7 +225,7 @@ class StepTwo extends StatelessWidget {
                 .labelLarge!
                 .copyWith(color: Theme.of(context).colorScheme.onBackground),
             inputDecoration: InputDecoration.collapsed(
-                hintText: 'Votre réponse',
+                hintText: appLocalizations.answer,
                 hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -236,9 +239,9 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "5- Email"),
+        Label(title: "5- ${appLocalizations.email}"),
         Input(
-          hintText: 'Votre réponse',
+          hintText: appLocalizations.answer,
           keyboardType: TextInputType.emailAddress,
           controller: emailController,
           // onChanged: onChangedFullName,
@@ -246,20 +249,20 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "6- Ma profession est:", required: true),
+        Label(title: "6- ${appLocalizations.job}:", required: true),
         Input(
-          hintText: 'Votre réponse',
+          hintText: appLocalizations.answer,
           controller: jobController,
           validator: ValidationBuilder().required().build(),
         ),
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "7- Mon Statut matrimonial est: ", required: true),
+        Label(title: "7- ${appLocalizations.marital}: ", required: true),
         DropdownButtonForm<DropdownModel>(
           items: maritalStatus,
           selectedValue: selectedMaritalStatusValue,
-          label: 'Sélectionner',
+          label: appLocalizations.select,
           onChangeValue: (value) {},
           onChanged: onChangeMaritalStatus,
           validator: validatorMaritalStatus,
@@ -267,11 +270,11 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(title: "8- Type d'usager", required: true),
+        Label(title: "8- ${appLocalizations.user_type}", required: true),
         Column(children: [
           RadioListTile<SingingCharacter>(
             title: Text(
-              usagerType[0]["title"],
+              appLocalizations.usagerType_1,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.onBackground),
@@ -287,7 +290,7 @@ class StepTwo extends StatelessWidget {
           ),
           RadioListTile<SingingCharacter>(
             title: Text(
-              usagerType[1]["title"],
+              appLocalizations.usagerType_2,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.onBackground),
@@ -303,7 +306,7 @@ class StepTwo extends StatelessWidget {
           ),
           RadioListTile<SingingCharacter>(
             title: Text(
-              usagerType[2]["title"],
+              appLocalizations.usagerType_3,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.onBackground),
@@ -325,14 +328,13 @@ class StepTwo extends StatelessWidget {
                   SizedBox(
                     height: Dimens.doubleSpace.h,
                   ),
-                  const Label(
-                    title:
-                        "8.1- Ma Région et mon département de naissance sont: ",
+                  Label(
+                    title: "8.1- ${appLocalizations.my_birth_region}: ",
                     required: true,
                   ),
                   DropdownButtonForm<DropdownModel>(
                     items: allList,
-                    label: 'Sélectionner',
+                    label: appLocalizations.select,
                     onChangeValue: (value) {},
                     onChanged: onChangeRegion,
                     validator: validatorRegion,
@@ -343,13 +345,13 @@ class StepTwo extends StatelessWidget {
                       SizedBox(
                         height: Dimens.doubleSpace.h,
                       ),
-                      const Label(
-                        title: "8.2- Mon casier judiciaire sera établi à: ",
+                      Label(
+                        title: "8.2- ${appLocalizations.my_criminal_record}: ",
                         required: true,
                       ),
                       DropdownButtonForm<DropdownModel>(
                         items: customCours,
-                        label: 'Sélectionner',
+                        label: appLocalizations.select,
                         onChangeValue: (value) {},
                         validator: validatorCourt,
                         onChanged: onChangeCustom,
@@ -367,13 +369,13 @@ class StepTwo extends StatelessWidget {
                   SizedBox(
                     height: Dimens.doubleSpace.h,
                   ),
-                  const Label(
-                    title: "8.3- Mon casier judiciare sera établi à:",
+                  Label(
+                    title: "8.3- ${appLocalizations.my_birth_region}:",
                     required: true,
                   ),
                   DropdownButtonForm<DropdownModel>(
                     items: customCours,
-                    label: 'Sélectionner',
+                    label: appLocalizations.select,
                     onChangeValue: (value) {},
                     onChanged: onChangeCustom,
                     validator: validatorLocation,
@@ -384,13 +386,13 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(
-          title: "9- Je reside à:",
+        Label(
+          title: "9- ${appLocalizations.place_of_residence}:",
           required: true,
         ),
         RadioListTile<ResidenceCondition>(
           title: Text(
-            "Je réside au cameroun",
+            appLocalizations.i_live_cameroon,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w500,
                 color: Theme.of(context).colorScheme.onBackground),
@@ -406,7 +408,7 @@ class StepTwo extends StatelessWidget {
         ),
         RadioListTile<ResidenceCondition>(
           title: Text(
-            "Je réside à l'étranger",
+            appLocalizations.i_live_abroad,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w500,
                 color: Theme.of(context).colorScheme.onBackground),
@@ -427,13 +429,13 @@ class StepTwo extends StatelessWidget {
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Label(
-                    title: "9.1- Ma commune de résidence est:",
+                  Label(
+                    title: "9.1- ${appLocalizations.municipality}:",
                     required: true,
                   ),
                   DropdownButtonForm<DropdownModel>(
                     items: birth,
-                    label: 'Sélectionner',
+                    label: appLocalizations.select,
                     selectedValue: selectedBornValue,
                     onChangeValue: (value) {},
                     validator: validatorBirth,
@@ -442,24 +444,24 @@ class StepTwo extends StatelessWidget {
                   SizedBox(
                     height: Dimens.doubleSpace.h,
                   ),
-                  const Label(
-                    title: "9.2- L'adresse de livraison est:",
+                  Label(
+                    title: "9.2- ${appLocalizations.address}:",
                     required: true,
                   ),
                   Input(
-                    hintText: 'Votre réponse',
+                    hintText: appLocalizations.answer,
                     controller: deliveryAddressController,
                     validator: ValidationBuilder().required().build(),
                   ),
                   SizedBox(
                     height: Dimens.doubleSpace.h,
                   ),
-                  const Label(
-                    title: "9.3- Lieu dit:",
+                  Label(
+                    title: "9.3- ${appLocalizations.location}:",
                     required: true,
                   ),
                   Input(
-                    hintText: 'Votre réponse',
+                    hintText: appLocalizations.answer,
                     controller: placeCalledController,
                     validator: ValidationBuilder().required().build(),
                   ),
@@ -470,13 +472,13 @@ class StepTwo extends StatelessWidget {
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Label(
-                    title: "9.4- Mon pays de résidence est:",
+                  Label(
+                    title: "9.4- ${appLocalizations.location_country}:",
                     required: true,
                   ),
                   DropdownButtonForm<DropdownModel>(
                     items: nationality,
-                    label: 'Sélectionner',
+                    label: appLocalizations.select,
                     selectedValue: selectedNationalityValue,
                     onChangeValue: (value) {},
                     validator: validatorNationality,
@@ -488,12 +490,12 @@ class StepTwo extends StatelessWidget {
                       SizedBox(
                         height: Dimens.doubleSpace.h,
                       ),
-                      const Label(
-                        title: "9.5- Adresse",
+                      Label(
+                        title: "9.5- ${appLocalizations.adresse_country}",
                         required: true,
                       ),
                       Input(
-                        hintText: 'Votre réponse',
+                        hintText: appLocalizations.answer,
                         controller: addressController,
                         validator: ValidationBuilder().required().build(),
                         // onChanged: onChangedOtherBorn,
@@ -501,12 +503,12 @@ class StepTwo extends StatelessWidget {
                       SizedBox(
                         height: Dimens.doubleSpace.h,
                       ),
-                      const Label(
-                        title: "9.6- Code Postal",
+                      Label(
+                        title: "9.6- ${appLocalizations.postal_code}",
                         required: true,
                       ),
                       Input(
-                        hintText: 'Votre réponse',
+                        hintText: appLocalizations.answer,
                         controller: postalCodeController,
                         validator: ValidationBuilder().required().build(),
                         // onChanged: onChangedOtherBorn,
@@ -519,8 +521,8 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(
-            title: "10- Numéro d'un proche (CAS D'URGENCE)", required: true),
+        Label(
+            title: "10- ${appLocalizations.alternate_number}", required: true),
         DecoratedBox(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(Dimens.radius.w)),
@@ -547,7 +549,7 @@ class StepTwo extends StatelessWidget {
                 .labelLarge!
                 .copyWith(color: Theme.of(context).colorScheme.onBackground),
             inputDecoration: InputDecoration.collapsed(
-                hintText: 'Votre réponse',
+                hintText: appLocalizations.answer,
                 hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -561,13 +563,13 @@ class StepTwo extends StatelessWidget {
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(
-          title: "11- Nombre de casiers judiciaire dont j'ai besoin:",
+        Label(
+          title: "11- ${appLocalizations.number_of_criminal}:",
         ),
         DropdownButtonForm<DropdownModel>(
           items: numberChoice,
           selectedValue: selectedNumberValue,
-          label: 'Sélectionner',
+          label: appLocalizations.select,
           onChangeValue: (value) {},
           onChanged: onChangeNumber,
         ),
@@ -587,7 +589,7 @@ class StepTwo extends StatelessWidget {
                       exit(0);
                     }
                   },
-                  text: "Annuler"),
+                  text: appLocalizations.cancel),
             ),
             SizedBox(
               width: Dimens.minSpace.w,
@@ -596,7 +598,7 @@ class StepTwo extends StatelessWidget {
               child: Button(
                   type: ButtonType.primary,
                   onPressed: onNextStep,
-                  text: "Continuer"),
+                  text: appLocalizations.continuer),
             ),
           ],
         ),

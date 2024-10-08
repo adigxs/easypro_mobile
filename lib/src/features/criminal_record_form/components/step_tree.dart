@@ -5,6 +5,7 @@ import 'package:easy_pro/src/shared/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
 import 'package:easy_pro/src/shared/utils/sized_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StepTree extends StatelessWidget {
   const StepTree({
@@ -68,65 +69,69 @@ class StepTree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ItemResum(label: 'Civilité', value: civilite),
-        ItemResum(label: 'Nom et Prénom', value: fullName),
-        ItemResum(label: 'Téléphone', value: number),
-        ItemResum(label: 'Numéro Whatsapp', value: whatsappNumber),
-        ItemResum(label: 'Email', value: email),
-        ItemResum(label: 'Ma profession', value: jobName),
-        ItemResum(label: 'Mon Statut matrimonal', value: maritalStatusName),
-        ItemResum(label: 'Type d\'usager', value: usager),
+        ItemResum(label: appLocalizations!.title, value: civilite),
+        ItemResum(label: appLocalizations.full_name, value: fullName),
+        ItemResum(label: appLocalizations.phone_number, value: number),
+        ItemResum(
+            label: appLocalizations.whastapp_number, value: whatsappNumber),
+        ItemResum(label: appLocalizations.email, value: email),
+        ItemResum(label: appLocalizations.job, value: jobName),
+        ItemResum(label: appLocalizations.marital, value: maritalStatusName),
+        ItemResum(label: appLocalizations.user_type, value: usager),
         if (usager == 'Je suis Camerounais né au Cameroun')
           Column(
             children: [
               ItemResum(
-                  label: 'Ma Région et mon\ndépartement de naissance',
-                  value: region!),
-              ItemResum(
-                  label: 'Tribunal d\'etablissement C.J:', value: location),
+                  label: appLocalizations.my_birth_region, value: region!),
+              ItemResum(label: appLocalizations.user_type, value: location),
             ],
           )
         else
-          const ItemResum(
-              label: 'Mon casier judiciaire\nsera etabli au: ',
-              value:
-                  "Fichier central des casiers judiciaires - Minjustice - Yaoundé"),
+          ItemResum(
+              label: appLocalizations.criminal_record_certificate,
+              value: appLocalizations.central_file),
         ItemResum(
-          label: 'Je réside à: ',
+          label: appLocalizations.place_of_residence,
           value: residenceCondition == ResidenceCondition.cameroon
-              ? "Je réside au cameroun"
-              : "Je réside a l'étranger",
+              ? appLocalizations.i_live_cameroon
+              : appLocalizations.i_live_abroad,
         ),
         ItemResum(
             label: residenceCondition == ResidenceCondition.cameroon
-                ? 'Ma commune de\nrésidence est:'
-                : "Mon pays de\nré```sidence est:",
+                ? appLocalizations.municipality
+                : appLocalizations.location_country,
             value: placeOfResidence),
         residenceCondition == ResidenceCondition.cameroon
             ? Column(
                 children: [
                   ItemResum(
-                      label: 'L\'adresse de livraison est',
+                      label: appLocalizations.address,
                       value: deliveryAddressName),
-                  ItemResum(label: 'Lieu dit', value: placeCalledText),
+                  ItemResum(
+                      label: appLocalizations.location, value: placeCalledText),
                 ],
               )
             : const SizedBox(),
         residenceCondition == ResidenceCondition.stranger
             ? Column(
                 children: [
-                  ItemResum(label: 'Adresse', value: address),
-                  ItemResum(label: 'Code postal', value: postalCodeName),
+                  ItemResum(
+                      label: appLocalizations.adresse_country, value: address),
+                  ItemResum(
+                      label: appLocalizations.postal_code,
+                      value: postalCodeName),
                 ],
               )
             : const SizedBox(),
         ItemResum(
-            label: 'Numéro de la personne à contacter',
-            value: contactPersonName),
-        ItemResum(label: 'Nombre de casiers judiciaire', value: numberChoice),
+            label: appLocalizations.alternate_number, value: contactPersonName),
+        ItemResum(
+            label: appLocalizations.number_of_criminal, value: numberChoice),
         const Divider(),
         Row(
           children: [
@@ -138,7 +143,7 @@ class StepTree extends StatelessWidget {
             ),
             Flexible(
               child: Text(
-                "Je confirme que mes informations sont correctes",
+                appLocalizations.certify_info,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onBackground),
@@ -155,14 +160,14 @@ class StepTree extends StatelessWidget {
             Button(
                 type: ButtonType.primary,
                 onPressed: accepted == true ? onNextStep : null,
-                text: "Télécharger vos documents"),
+                text: appLocalizations.upload_doc),
             SizedBox(
               height: Dimens.doubleSpace.h,
             ),
             Button(
                 type: ButtonType.secondary,
                 onPressed: onBackStep,
-                text: "Retour"),
+                text: appLocalizations.back),
           ],
         ),
         SizedBox(

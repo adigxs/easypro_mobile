@@ -6,6 +6,17 @@ class SecureStorage {
     required this.storage,
   });
 
+  Future<void> saveLanguage(String value) async {
+    await storage.write(key: languagePrefs, value: value);
+  }
+
+  Future<String?> getLanguageValue() async {
+    final data = await storage.read(key: languagePrefs);
+    return data;
+  }
+
+  static const String languagePrefs = 'language-prefs';
+
   // Future<void> saveAccessToken(UserSecrets secrets) async {
   //   await storage.write(key: accessToken, value: jsonEncode(secrets.toJson()));
   // }

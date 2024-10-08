@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_pro/src/datasource/models/api_response.dart';
 import 'package:easy_pro/src/datasource/models/check_transaction_request.dart';
 import 'package:easy_pro/src/features/criminal_record_form/logic/payment/check_transaction/check_transaction_bloc.dart';
@@ -224,15 +225,17 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     String title = step == 1
         ? ""
         : step == 2
-            ? "REMPLISSEZ CE FORMULAIRE SVP"
+            ? appLocalizations!.title_2
             : step == 3
-                ? "RELISEZ VOS REPONSES SVP"
+                ? appLocalizations!.title_3
                 : step == 4
-                    ? "ATTACHEZ VOS DOCUMENTS SVP"
-                    : "VOTRE NOTE DE FRAIS ";
+                    ? appLocalizations!.title_4
+                    : appLocalizations!.title_5;
     return Scaffold(
       backgroundColor: step == 4
           ? Theme.of(context).colorScheme.background
@@ -1359,6 +1362,8 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
     required String requestCode,
   }) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final appLocalizations = AppLocalizations.of(context);
+
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -1376,7 +1381,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Choisir le moyen de paiement",
+                  appLocalizations!.payment_mode,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground),
                 ),
@@ -1542,7 +1547,7 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                                           width: Dimens.space.w,
                                         ),
                                         Text(
-                                          "Autres Methodes",
+                                          appLocalizations.other_mode,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!
@@ -1720,10 +1725,12 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                               MessageDialog.show(
                                   context: context,
                                   type: MessageType.Error,
-                                  message: "Choisir un mode de paiement");
+                                  message: appLocalizations.payment_mode);
                             }
                           },
-                          text: otherPaymentName != '' ? "Continuer" : "Payer")
+                          text: otherPaymentName != ''
+                              ? appLocalizations.continuer
+                              : appLocalizations.paye)
                     ],
                   ),
                 ),

@@ -7,6 +7,7 @@ import 'package:easy_pro/src/shared/components/loader.dart';
 import 'package:easy_pro/src/shared/utils/sized_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StepFive extends StatelessWidget {
   const StepFive({
@@ -66,14 +67,16 @@ class StepFive extends StatelessWidget {
   Widget build(BuildContext context) {
     // final isCamerounian = character == SingingCharacter.cameroonian ||
     //     character == SingingCharacter.cameroforeigner;
+    final appLocalizations = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: Dimens.doubleSpace.h,
         ),
-        const Label(
-          title: "Copie de l'acte de naissance (version scannée)",
+        Label(
+          title: appLocalizations!.copie_birth,
           required: true,
         ),
         InkWell(
@@ -87,7 +90,7 @@ class StepFive extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    fileActeName ?? "Cliquez ici svp !...",
+                    fileActeName ?? appLocalizations.click_here,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),
@@ -108,8 +111,8 @@ class StepFive extends StatelessWidget {
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Label(
-                    title: "Copie CNI (recto ou copie complète)",
+                  Label(
+                    title: appLocalizations.copy_cni,
                     required: true,
                   ),
                   InkWell(
@@ -123,7 +126,7 @@ class StepFive extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              fileCniFrontName ?? 'Cliquez ici svp !...',
+                              fileCniFrontName ?? appLocalizations.click_here,
                               textAlign: TextAlign.start,
                               style: Theme.of(context)
                                   .textTheme
@@ -144,8 +147,8 @@ class StepFive extends StatelessWidget {
                   SizedBox(
                     height: Dimens.doubleSpace.h,
                   ),
-                  const Label(
-                    title: "Pièce d'identité (verso)",
+                  Label(
+                    title: appLocalizations.identity,
                   ),
                   InkWell(
                     onTap: onTapCniBackFile,
@@ -158,7 +161,7 @@ class StepFive extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              fileCniBackName ?? 'Cliquez ici svp !...',
+                              fileCniBackName ?? appLocalizations.click_here,
                               textAlign: TextAlign.start,
                               style: Theme.of(context)
                                   .textTheme
@@ -185,8 +188,8 @@ class StepFive extends StatelessWidget {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Label(
-                        title: "Passport (Page identification)",
+                      Label(
+                        title: appLocalizations.passport1,
                       ),
                       InkWell(
                         onTap: onTapPassportIdentityFile,
@@ -200,7 +203,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   filePassportIdentityName ??
-                                      'Cliquez ici svp !...',
+                                      appLocalizations.click_here,
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -221,8 +224,8 @@ class StepFive extends StatelessWidget {
                       SizedBox(
                         height: Dimens.doubleSpace.h,
                       ),
-                      const Label(
-                        title: "Passport (Page de visa Cameroun)",
+                      Label(
+                        title: appLocalizations.passport2,
                       ),
                       InkWell(
                         onTap: onTapPassportVisaFile,
@@ -236,7 +239,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   filePassportVisaName ??
-                                      'Cliquez ici svp !...',
+                                      appLocalizations.click_here,
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -257,8 +260,8 @@ class StepFive extends StatelessWidget {
                       SizedBox(
                         height: Dimens.doubleSpace.h,
                       ),
-                      const Label(
-                        title: "Preuve de séjour au Cameroun",
+                      Label(
+                        title: appLocalizations.live_cameroon,
                       ),
                       InkWell(
                         onTap: onTapResidencePermitFile,
@@ -272,7 +275,7 @@ class StepFive extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   fileResidencePermitName ??
-                                      'Cliquez ici svp !...',
+                                      appLocalizations.click_here,
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -296,9 +299,7 @@ class StepFive extends StatelessWidget {
                     ],
                   )
                 : const SizedBox(),
-        const Label(
-          title: "Acte de mariage (femmes mariées)",
-        ),
+        Label(title: appLocalizations.marital_certificate),
         InkWell(
           onTap: onTapWedCertificateFile,
           child: Padding(
@@ -310,7 +311,7 @@ class StepFive extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    fileWedCertificateName ?? 'Cliquez ici svp !...',
+                    fileWedCertificateName ?? appLocalizations.click_here,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),
@@ -332,7 +333,7 @@ class StepFive extends StatelessWidget {
               child: Button(
                   type: ButtonType.primary,
                   onPressed: fileActeName != null ? onNextStep : null,
-                  text: "MA NOTE DE FRAIS"),
+                  text: appLocalizations.note_frais),
             ),
           ],
         ),

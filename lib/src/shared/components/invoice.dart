@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_pro/src/core/themes/dimens.dart';
 import 'package:easy_pro/src/datasource/models/criminal_record_response.dart';
 import 'package:easy_pro/src/datasource/models/expense_report_response.dart';
@@ -28,6 +29,8 @@ class Invoice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return ListView(
       children: [
         Column(
@@ -41,7 +44,7 @@ class Invoice extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    'Note de frais pour l\'etablissement de l\'extrait du casier judiciare numéro: $requestCode',
+                    '${appLocalizations!.expense_statement_title}: $requestCode',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w600,
@@ -56,28 +59,28 @@ class Invoice extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Désignation',
+                  appLocalizations.designation,
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 Text(
-                  'Quantités',
+                  appLocalizations.quantity,
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 Text(
-                  'P.U',
+                  appLocalizations.pu,
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 Text(
-                  'Montants',
+                  appLocalizations.amounts,
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onBackground,
@@ -93,7 +96,7 @@ class Invoice extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text("Trésor public (timbre fiscal)",
+                  child: Text(appLocalizations.public,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).colorScheme.onBackground,
@@ -132,7 +135,7 @@ class Invoice extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text("Débours (Frais de fouilles+\ntransport+relais)",
+                  child: Text(appLocalizations.disbursements,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).colorScheme.onBackground,
@@ -171,7 +174,7 @@ class Invoice extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text("Frais de services",
+                  child: Text(appLocalizations.fees,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).colorScheme.onBackground,
@@ -228,7 +231,7 @@ class Invoice extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    "j’accepte de payer la note de frais",
+                    appLocalizations.agree_fees,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).colorScheme.onBackground),
@@ -252,7 +255,7 @@ class Invoice extends StatelessWidget {
                           exit(0);
                         }
                       },
-                      text: "Annuler"),
+                      text: appLocalizations.cancel),
                 ),
                 SizedBox(
                   width: Dimens.minSpace.w,
@@ -261,7 +264,7 @@ class Invoice extends StatelessWidget {
                   child: Button(
                       type: ButtonType.primary,
                       onPressed: acceptedNote == true ? onNextStep : null,
-                      text: "Je Paye"),
+                      text: appLocalizations.paye),
                 ),
               ],
             ),
@@ -276,7 +279,8 @@ class Invoice extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(Dimens.doublePadding.w),
                 child: Text(
-                  "Après paiement ne quittez pas !\n\nTELECHARGEZ IMMEDIATEMENT VOTRE REÇU DE PAIEMENT SVP\n\nCONSERVEZ-LE JUSQU’À LIVRAISON DE VOTRE DOCUMENT SVP",
+                  "${appLocalizations.pay1}\n\n${appLocalizations.pay2}\n\n${appLocalizations.pay3}"
+                      .toUpperCase(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w600,
