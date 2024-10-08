@@ -44,6 +44,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:easy_pro/src/features/criminal_record_form/logic/language/language_bloc.dart';
+import 'package:easy_pro/src/features/criminal_record_form/logic/language/language_event.dart';
+import 'package:easy_pro/src/datasource/models/language.dart';
+import 'package:easy_pro/src/features/criminal_record_form/logic/language/laguage_state.dart';
 
 class CriminalRecordScreen extends StatefulWidget {
   const CriminalRecordScreen({super.key});
@@ -243,6 +247,41 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
       appBar: AppBar(
         // backgroundColor: Colors.red,
         toolbarHeight: 70,
+        leading: Row(
+          children: [
+            RawMaterialButton(
+              onPressed: () {
+                showLanguageBottomSheet(context);
+              },
+              constraints: const BoxConstraints(),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimens.fullRadius.w),
+                    border: Border.all(
+                        width: 2, color: Theme.of(context).primaryColor)),
+                child: SizedBox(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: Dimens.smPadding.h,
+                        horizontal: Dimens.halfPadding.w),
+                    child: Text(
+                      context
+                          .read<LanguageBloc>()
+                          .state
+                          .selectedLanguage
+                          .value
+                          .languageCode
+                          .toUpperCase(),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: Dimens.padding.w),
@@ -1740,6 +1779,69 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
         });
       },
     );
+  }
+
+  void showLanguageBottomSheet(BuildContext context) {
+    displayBottomSheet(
+        context: context,
+        height: MediaQuery.of(context).size.height * .25,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.choose_language,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Theme.of(context).colorScheme.onBackground),
+          ),
+          SizedBox(height: Dimens.mediumSpace.h),
+          BlocBuilder<LanguageBloc, LanguageState>(
+            builder: (context, state) {
+              return ListView.separated(
+                shrinkWrap: true,
+                itemCount: Language.values.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () {
+                      context.read<LanguageBloc>().add(
+                            ChangeLanguage(
+                              selectedLanguage: Language.values[index],
+                            ),
+                          );
+                      Future.delayed(const Duration(milliseconds: 300))
+                          .then((value) => Navigator.of(context).pop());
+                    },
+                    title: Text(
+                      Language.values[index].text,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
+                    trailing: Language.values[index] == state.selectedLanguage
+                        ? Icon(
+                            Icons.check_circle_rounded,
+                            color: Theme.of(context).primaryColor,
+                          )
+                        : null,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Dimens.radius.w),
+                      side: Language.values[index] == state.selectedLanguage
+                          ? BorderSide(
+                              color: Theme.of(context).primaryColor, width: 1)
+                          : BorderSide(
+                              color: Theme.of(context).colorScheme.onBackground,
+                              width: 0.5),
+                    ),
+                    tileColor: Language.values[index] == state.selectedLanguage
+                        ? Theme.of(context).primaryColor.withOpacity(0.05)
+                        : null,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: Dimens.mediumSpace.h);
+                },
+              );
+            },
+          ),
+        ]);
   }
 
   void errorMessage({required String message}) {

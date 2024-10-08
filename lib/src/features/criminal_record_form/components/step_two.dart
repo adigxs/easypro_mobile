@@ -140,7 +140,7 @@ class StepTwo extends StatelessWidget {
         DropdownButtonForm<DropdownModel>(
           items: civilites,
           selectedValue: selectedCivilityValue,
-          label: appLocalizations!.select,
+          label: appLocalizations.select,
           onChangeValue: (value) {},
           onChanged: onChangeCivility,
           validator: validatorCivility,
