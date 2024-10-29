@@ -1500,126 +1500,126 @@ class _CriminalRecordScreenState extends State<CriminalRecordScreen> {
                           ],
                         ),
                       ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              stfSetState(() {
-                                paymentMode = 2;
-                              });
-                              context.read<PaymentBloc>().add(
-                                  OnChangePaymentMethode(
-                                      paymentMethod: PaymentMethode.mtn));
+                      // Column(
+                      //   children: [
+                      //     InkWell(
+                      //       onTap: () async {
+                      //         stfSetState(() {
+                      //           paymentMode = 2;
+                      //         });
+                      //         context.read<PaymentBloc>().add(
+                      //             OnChangePaymentMethode(
+                      //                 paymentMethod: PaymentMethode.mtn));
 
-                              FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles(
-                                withData: true,
-                                type: FileType.custom,
-                                allowedExtensions: [
-                                  'pdf',
-                                  'doc',
-                                  'docx',
-                                  'jpg',
-                                  'png'
-                                ],
-                              );
-                              if (result != null) {
-                                setState(() {
-                                  filePaymentMethod = result.files.first;
-                                });
-                                stfSetState(() {
-                                  isLoadingOtherPaymentFiles = true;
-                                });
+                      //         FilePickerResult? result =
+                      //             await FilePicker.platform.pickFiles(
+                      //           withData: true,
+                      //           type: FileType.custom,
+                      //           allowedExtensions: [
+                      //             'pdf',
+                      //             'doc',
+                      //             'docx',
+                      //             'jpg',
+                      //             'png'
+                      //           ],
+                      //         );
+                      //         if (result != null) {
+                      //           setState(() {
+                      //             filePaymentMethod = result.files.first;
+                      //           });
+                      //           stfSetState(() {
+                      //             isLoadingOtherPaymentFiles = true;
+                      //           });
 
-                                PlatformFile file = result.files.first;
+                      //           PlatformFile file = result.files.first;
 
-                                final data = await uploadFile(file);
+                      //           final data = await uploadFile(file);
 
-                                if (data.successResponse != null) {
-                                  setState(() {
-                                    otherPaymentName = data.successResponse!;
-                                    isLoadingOtherPaymentFiles = false;
-                                  });
-                                  stfSetState(() {
-                                    otherPaymentName = data.successResponse!;
-                                  });
-                                } else {
-                                  ApiError<dynamic> error = data.errorResponse!;
-                                  errorMessage(message: error.message);
-                                  stfSetState(() {
-                                    isLoadingOtherPaymentFiles = false;
-                                  });
-                                }
-                              }
-                            },
-                            child: Stack(
-                              children: [
-                                DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 2,
-                                        color: paymentMode == 2
-                                            ? Colors.green
-                                            : Colors.transparent),
-                                    borderRadius:
-                                        BorderRadius.circular(Dimens.radius.w),
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.all(Dimens.halfPadding.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        isLoadingOtherPaymentFiles
-                                            ? const Loader()
-                                            : Image(
-                                                width: 32,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .error,
-                                                image: AssetImage(Assets
-                                                    .icons
-                                                    .fluentPayment16RegularPng
-                                                    .path)),
-                                        SizedBox(
-                                          width: Dimens.space.w,
-                                        ),
-                                        Text(
-                                          appLocalizations.other_mode,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w900,
-                                                  fontSize: 32,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .error),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: Dimens.space.h,
-                          ),
-                          if (otherPaymentName != '')
-                            Text(
-                              'Le fichier a bien été join.\n Cliquez sur continuer',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                        ],
-                      ),
+                      //           if (data.successResponse != null) {
+                      //             setState(() {
+                      //               otherPaymentName = data.successResponse!;
+                      //               isLoadingOtherPaymentFiles = false;
+                      //             });
+                      //             stfSetState(() {
+                      //               otherPaymentName = data.successResponse!;
+                      //             });
+                      //           } else {
+                      //             ApiError<dynamic> error = data.errorResponse!;
+                      //             errorMessage(message: error.message);
+                      //             stfSetState(() {
+                      //               isLoadingOtherPaymentFiles = false;
+                      //             });
+                      //           }
+                      //         }
+                      //       },
+                      //       child: Stack(
+                      //         children: [
+                      //           DecoratedBox(
+                      //             decoration: BoxDecoration(
+                      //               border: Border.all(
+                      //                   width: 2,
+                      //                   color: paymentMode == 2
+                      //                       ? Colors.green
+                      //                       : Colors.transparent),
+                      //               borderRadius:
+                      //                   BorderRadius.circular(Dimens.radius.w),
+                      //             ),
+                      //             child: Padding(
+                      //               padding:
+                      //                   EdgeInsets.all(Dimens.halfPadding.w),
+                      //               child: Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.center,
+                      //                 children: [
+                      //                   isLoadingOtherPaymentFiles
+                      //                       ? const Loader()
+                      //                       : Image(
+                      //                           width: 32,
+                      //                           color: Theme.of(context)
+                      //                               .colorScheme
+                      //                               .error,
+                      //                           image: AssetImage(Assets
+                      //                               .icons
+                      //                               .fluentPayment16RegularPng
+                      //                               .path)),
+                      //                   SizedBox(
+                      //                     width: Dimens.space.w,
+                      //                   ),
+                      //                   Text(
+                      //                     appLocalizations.other_mode,
+                      //                     style: Theme.of(context)
+                      //                         .textTheme
+                      //                         .titleMedium!
+                      //                         .copyWith(
+                      //                             fontWeight: FontWeight.w900,
+                      //                             fontSize: 32,
+                      //                             color: Theme.of(context)
+                      //                                 .colorScheme
+                      //                                 .error),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       height: Dimens.space.h,
+                      //     ),
+                      //     if (otherPaymentName != '')
+                      //       Text(
+                      //         'Le fichier a bien été join.\n Cliquez sur continuer',
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .titleSmall!
+                      //             .copyWith(
+                      //                 color: Theme.of(context)
+                      //                     .colorScheme
+                      //                     .onBackground),
+                      //       ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: Dimens.tripleSpace.h,
                       ),
